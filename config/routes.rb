@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :api do
+    resources :roles do
+      post 'assign_role', on: :collection
+      get 'lookup_role/:user_id/:team_id', action: :lookup_role, on: :collection
+      get 'lookup_memberships/:role_id', action: :lookup_memberships, on: :collection
+    end
+    resources :memberships
+  end
 end
